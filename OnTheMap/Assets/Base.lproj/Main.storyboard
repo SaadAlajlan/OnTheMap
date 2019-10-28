@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="RQm-Sg-mmb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="azL-rs-3H7">
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
@@ -7,10 +7,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Table View Controller-->
+        <!--TableViewController-->
         <scene sceneID="CeK-uA-VKk">
             <objects>
-                <tableViewController id="JxU-AL-mDo" sceneMemberID="viewController">
+                <tableViewController title="TableViewController" id="JxU-AL-mDo" customClass="TableViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Tn1-Mr-ylE">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -37,10 +37,10 @@
             </objects>
             <point key="canvasLocation" x="1028" y="605"/>
         </scene>
-        <!--View Controller-->
+        <!--MapViewController-->
         <scene sceneID="03V-FY-CcV">
             <objects>
-                <viewController id="JJg-9s-9wh" sceneMemberID="viewController">
+                <viewController title="MapViewController" id="JJg-9s-9wh" customClass="MapViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GBg-dU-eBU">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -62,15 +62,18 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="mappin.and.ellipse" catalog="system" id="wg8-4g-MR0"/>
                     <navigationItem key="navigationItem" id="L5H-et-Zx6"/>
+                    <connections>
+                        <outlet property="mapView" destination="3JF-Ut-X6F" id="MmF-Zk-WYt"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3br-Xp-dos" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1027.5" y="-133.75"/>
         </scene>
-        <!--View Controller-->
+        <!--Login View Controller-->
         <scene sceneID="Sfx-vW-og9">
             <objects>
-                <viewController id="RQm-Sg-mmb" sceneMemberID="viewController">
+                <viewController id="RQm-Sg-mmb" customClass="LoginViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VbN-Ea-Eec">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -121,13 +124,18 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="LVE-qS-kzM">
+                                <rect key="frame" x="197" y="486" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="LVE-qS-kzM" firstAttribute="top" secondItem="m9r-Wz-xBA" secondAttribute="bottom" constant="41.333333333333314" id="3oN-OL-BcB"/>
                             <constraint firstItem="m9r-Wz-xBA" firstAttribute="leading" secondItem="TIf-Ac-Fcl" secondAttribute="leading" constant="16" id="EqC-U7-ueC"/>
                             <constraint firstItem="aJo-RS-Kr7" firstAttribute="leading" secondItem="TIf-Ac-Fcl" secondAttribute="leading" constant="105" id="Lbj-R7-j0f"/>
                             <constraint firstItem="TIf-Ac-Fcl" firstAttribute="trailing" secondItem="m9r-Wz-xBA" secondAttribute="trailing" constant="16" id="bbj-Gb-UzG"/>
                             <constraint firstItem="aJo-RS-Kr7" firstAttribute="centerX" secondItem="TIf-Ac-Fcl" secondAttribute="centerX" id="d0S-4K-832"/>
+                            <constraint firstItem="LVE-qS-kzM" firstAttribute="centerX" secondItem="TIf-Ac-Fcl" secondAttribute="centerX" id="gwO-jU-Kpp"/>
                             <constraint firstItem="m9r-Wz-xBA" firstAttribute="centerX" secondItem="TIf-Ac-Fcl" secondAttribute="centerX" id="mNP-f0-d24"/>
                             <constraint firstItem="m9r-Wz-xBA" firstAttribute="centerY" secondItem="TIf-Ac-Fcl" secondAttribute="centerY" id="nLL-RM-KFj"/>
                             <constraint firstItem="aJo-RS-Kr7" firstAttribute="top" secondItem="TIf-Ac-Fcl" secondAttribute="top" constant="41" id="oSA-AI-sbt"/>
@@ -135,6 +143,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="TIf-Ac-Fcl"/>
                     </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="LVE-qS-kzM" id="QRa-AK-dOL"/>
+                        <outlet property="emailTextField" destination="ghy-iv-aRd" id="7xZ-Lj-1Aa"/>
+                        <outlet property="loginButton" destination="cKy-fJ-1ex" id="Y0A-Ln-2mL"/>
+                        <outlet property="passwordTextField" destination="sKC-I4-AkM" id="m3d-v6-q8Q"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GHl-X9-AC3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

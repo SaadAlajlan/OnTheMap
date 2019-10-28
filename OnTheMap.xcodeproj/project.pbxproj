@@ -13,6 +13,11 @@
 		9381204B236312AE00B49301 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9381204A236312AE00B49301 /* Assets.xcassets */; };
 		9381204E236312AE00B49301 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9381204C236312AE00B49301 /* LaunchScreen.storyboard */; };
 		9381205B23634D9100B49301 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9381205A23634D9100B49301 /* LoginViewController.swift */; };
+		93812067236351DE00B49301 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93812066236351DE00B49301 /* MapViewController.swift */; };
+		93812069236351FF00B49301 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93812068236351FF00B49301 /* TableViewController.swift */; };
+		9381206C236361FE00B49301 /* ParseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9381206B236361FE00B49301 /* ParseClient.swift */; };
+		9381206E2363636700B49301 /* ParseResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9381206D2363636700B49301 /* ParseResponse.swift */; };
+		938120702363769400B49301 /* LocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9381206F2363769400B49301 /* LocationModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +29,11 @@
 		9381204D236312AE00B49301 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9381204F236312AE00B49301 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9381205A23634D9100B49301 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		93812066236351DE00B49301 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		93812068236351FF00B49301 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		9381206B236361FE00B49301 /* ParseClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseClient.swift; sourceTree = "<group>"; };
+		9381206D2363636700B49301 /* ParseResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseResponse.swift; sourceTree = "<group>"; };
+		9381206F2363769400B49301 /* LocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +80,7 @@
 		9381205723634CA800B49301 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				93812071236376A600B49301 /* Data */,
 				9381206023634FCB00B49301 /* Requests */,
 				9381205F23634FBE00B49301 /* Responses */,
 				9381205E23634FA300B49301 /* Client */,
@@ -81,6 +92,8 @@
 			isa = PBXGroup;
 			children = (
 				9381205A23634D9100B49301 /* LoginViewController.swift */,
+				93812066236351DE00B49301 /* MapViewController.swift */,
+				93812068236351FF00B49301 /* TableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -92,25 +105,10 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		9381205C23634F4800B49301 /* Parse Client  */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Parse Client ";
-			sourceTree = "<group>";
-		};
-		9381205D23634F6200B49301 /* Udacity Client */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Udacity Client";
-			sourceTree = "<group>";
-		};
 		9381205E23634FA300B49301 /* Client */ = {
 			isa = PBXGroup;
 			children = (
-				9381205C23634F4800B49301 /* Parse Client  */,
-				9381205D23634F6200B49301 /* Udacity Client */,
+				9381206B236361FE00B49301 /* ParseClient.swift */,
 			);
 			path = Client;
 			sourceTree = "<group>";
@@ -118,8 +116,7 @@
 		9381205F23634FBE00B49301 /* Responses */ = {
 			isa = PBXGroup;
 			children = (
-				938120642363502A00B49301 /* UdacityResponses */,
-				938120632363501500B49301 /* ParrseResponses */,
+				9381206D2363636700B49301 /* ParseResponse.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -127,38 +124,8 @@
 		9381206023634FCB00B49301 /* Requests */ = {
 			isa = PBXGroup;
 			children = (
-				938120622363500100B49301 /* ParseRequests */,
-				9381206123634FF200B49301 /* UdacityRquests */,
 			);
 			path = Requests;
-			sourceTree = "<group>";
-		};
-		9381206123634FF200B49301 /* UdacityRquests */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = UdacityRquests;
-			sourceTree = "<group>";
-		};
-		938120622363500100B49301 /* ParseRequests */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ParseRequests;
-			sourceTree = "<group>";
-		};
-		938120632363501500B49301 /* ParrseResponses */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ParrseResponses;
-			sourceTree = "<group>";
-		};
-		938120642363502A00B49301 /* UdacityResponses */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = UdacityResponses;
 			sourceTree = "<group>";
 		};
 		938120652363506200B49301 /* Assets */ = {
@@ -169,6 +136,14 @@
 				9381204C236312AE00B49301 /* LaunchScreen.storyboard */,
 			);
 			path = Assets;
+			sourceTree = "<group>";
+		};
+		93812071236376A600B49301 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				9381206F2363769400B49301 /* LocationModel.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -242,9 +217,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				938120702363769400B49301 /* LocationModel.swift in Sources */,
+				9381206C236361FE00B49301 /* ParseClient.swift in Sources */,
 				9381205B23634D9100B49301 /* LoginViewController.swift in Sources */,
 				93812042236312AC00B49301 /* AppDelegate.swift in Sources */,
+				9381206E2363636700B49301 /* ParseResponse.swift in Sources */,
 				93812044236312AC00B49301 /* SceneDelegate.swift in Sources */,
+				93812069236351FF00B49301 /* TableViewController.swift in Sources */,
+				93812067236351DE00B49301 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
