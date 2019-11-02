@@ -8,6 +8,7 @@
 
 import Foundation
 
-class LocationModel{
-    
+struct StudentLocations : Codable{
+    let results = [StudentLocation]()
+
 }

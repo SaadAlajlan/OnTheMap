@@ -14,34 +14,47 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         @IBOutlet weak var mapView: MKMapView!
         
-        override func viewDidLoad() {
-            super.viewDidLoad()
-           
-            // The "locations" array is an array of dictionary objects that are similar to the JSON
-            // data that you can download from parse.
-            let locations = hardCodedLocationData()
-            
-            // We will create an MKPointAnnotation for each dictionary in "locations". The
-            // point annotations will be stored in this array, and then provided to the map view.
+       override func viewDidLoad() {
+               super.viewDidLoad()
+               mapView.delegate = self
+           }
+     override func viewWillAppear(_ animated: Bool) {
+        ParseClient.studentLocation() {(studentsLocations, error) in
+
+            DispatchQueue.main.async {
+    
+    if error != nil {
+        let errorAlert = UIAlertController(title: "Erorr performing request", message: "There was an error performing your request", preferredStyle: .alert )
+        
+        errorAlert.addAction(UIAlertAction (title: "OK", style: .default, handler: { _ in
+            return
+        }))
+        self.present(errorAlert, animated: true, completion: nil)
+        return
+    }
             var annotations = [MKPointAnnotation]()
             
-            // The "locations" array is loaded with the sample data below. We are using the dictionaries
-            // to create map annotations. This would be more stylish if the dictionaries were being
-            // used to create custom structs. Perhaps StudentLocation structs.
-            
-            for dictionary in locations {
+           
+            guard let locationsArray = studentsLocations else {
+                let locationsErrorAlert = UIAlertController(title: "Erorr loading locations", message: "There was an error loading locations", preferredStyle: .alert )
+                               
+                locationsErrorAlert.addAction(UIAlertAction (title: "OK", style: .default, handler: { _ in
+                                   return   }))
+                               self.present(locationsErrorAlert, animated: true, completion: nil)
+                               return
+                           }
+             for locationStruct in locationsArray {
                 
-                // Notice that the float values are being used to create CLLocationDegree values.
-                // This is a version of the Double type.
-                let lat = CLLocationDegrees(dictionary["latitude"] as! Double)
-                let long = CLLocationDegrees(dictionary["longitude"] as! Double)
+               
+                let lat = CLLocationDegrees(locationStruct.latitude!)
+                let long = CLLocationDegrees(locationStruct.longitude!)
                 
                 // The lat and long are used to create a CLLocationCoordinates2D instance.
                 let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
                 
-                let first = dictionary["firstName"] as! String
-                let last = dictionary["lastName"] as! String
-                let mediaURL = dictionary["mediaURL"] as! String
+                let first = locationStruct.firstName!
+                let last = locationStruct.lastName!
+                let mediaURL = locationStruct.mediaURL!
                 
                 // Here we create the annotation and set its coordiate, title, and subtitle properties
                 let annotation = MKPointAnnotation()
@@ -57,18 +70,14 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             self.mapView.addAnnotations(annotations)
             
         }
+    }
         
-        // MARK: - MKMapViewDelegate
-
-        // Here we create a view with a "right callout accessory view". You might choose to look into other
-        // decoration alternatives. Notice the similarity between this method and the cellForRowAtIndexPath
-        // method in TableViewDataSource.
         func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
             
             let reuseId = "pin"
             
             var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
-
+            
             if pinView == nil {
                 pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
                 pinView!.canShowCallout = true
@@ -81,35 +90,20 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             
             return pinView
         }
-
         
         // This delegate method is implemented to respond to taps. It opens the system browser
         // to the URL specified in the annotationViews subtitle property.
         func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+            
             if control == view.rightCalloutAccessoryView {
                 let app = UIApplication.shared
                 if let toOpen = view.annotation?.subtitle! {
-                    app.openURL(URL(string: toOpen)!)
+                    app.open(URL(string: toOpen)!, options: [:], completionHandler: nil)
                 }
             }
         }
-    //    func mapView(mapView: MKMapView, annotationView: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-    //
-    //        if control == annotationView.rightCalloutAccessoryView {
-    //            let app = UIApplication.sharedApplication()
-    //            app.openURL(NSURL(string: annotationView.annotation.subtitle))
-    //        }
-    //    }
-
-        // MARK: - Sample Data
         
-        // Some sample data. This is a dictionary that is more or less similar to the
-        // JSON data that you will download from Parse.
-        
-        func hardCodedLocationData() -> [[String : Any]] {
-            return  [
-//
-            ]
-        }
+    
     }
 
+}
