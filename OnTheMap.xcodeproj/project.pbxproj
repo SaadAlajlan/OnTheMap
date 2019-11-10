@@ -91,7 +91,6 @@
 			isa = PBXGroup;
 			children = (
 				93224357236D6C3500A03FC0 /* Network */,
-				9381206023634FCB00B49301 /* Requests */,
 				9381205F23634FBE00B49301 /* Responses */,
 				9381205E23634FA300B49301 /* Client */,
 			);
@@ -130,13 +129,6 @@
 				9381206D2363636700B49301 /* ParseResponse.swift */,
 			);
 			path = Responses;
-			sourceTree = "<group>";
-		};
-		9381206023634FCB00B49301 /* Requests */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Requests;
 			sourceTree = "<group>";
 		};
 		938120652363506200B49301 /* Assets */ = {

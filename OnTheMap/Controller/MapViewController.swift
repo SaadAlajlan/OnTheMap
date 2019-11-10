@@ -19,7 +19,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                mapView.delegate = self
            }
      override func viewWillAppear(_ animated: Bool) {
-        ParseClient.studentLocation() {(studentsLocations, error) in
+        ParseClient.getStudentLocation() {(studentsLocations, error) in
 
             DispatchQueue.main.async {
     
@@ -69,7 +69,10 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             // When the array is complete, we add the annotations to the map.
             self.mapView.addAnnotations(annotations)
             
+        
+            }
         }
+        
     }
         
         func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -106,4 +109,4 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     }
 
-}
+
