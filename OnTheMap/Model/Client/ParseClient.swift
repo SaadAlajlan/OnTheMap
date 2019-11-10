@@ -13,7 +13,7 @@ class ParseClient {
     
     
 class func postSession(email: String, password : String, completion: @escaping([String:Any]?, Error?) -> Void){
-    var request = URLRequest (url: URL (string: "https://onthemap-api.udacity.com/v1/session")!)
+    var request = URLRequest(url: URL(string: API.SESSION)!)
               request.httpMethod = "POST"
               request.addValue("application/json", forHTTPHeaderField: "Accept")
               request.addValue("application.json", forHTTPHeaderField: "Content-Type")
@@ -38,7 +38,7 @@ class func postSession(email: String, password : String, completion: @escaping([
           }
     
     class func deleteSession(completion: @escaping (Error?) -> Void){
-        var request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/session")!)
+        var request = URLRequest(url: URL(string: API.SESSION)!)
         request.httpMethod = "DELETE"
         var xsrfCookie: HTTPCookie? = nil
         let sharedCookieStorage = HTTPCookieStorage.shared
@@ -63,11 +63,10 @@ class func postSession(email: String, password : String, completion: @escaping([
 
 
     class func PostStudentLocation (link: String, coordinate: CLLocationCoordinate2D, location: String, completion: @escaping ( Error?) -> ()) {
-        var request = URLRequest (url: URL (string: "https://onthemap-api.udacity.com/v1/StudentLocation")!)
+      var request = URLRequest (url: URL (string: API.MAIN + "StudentLocation")!)
+       request.addValue(API.HeaderValues.PARSE_APP_ID, forHTTPHeaderField: API.HeaderKeys.PARSE_APP_ID)
         
-        request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
-        
-        request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
+        request.addValue(API.HeaderValues.PARSE_APP_KEY, forHTTPHeaderField: API.HeaderKeys.PARSE_APP_KEY)
         request.httpBody = "{\"uniqueKey\": \"1234\", \"firstName\": \"John\", \"lastName\": \"Doe\",\"mapString\": \"\(location)\", \"mediaURL\": \"\(link)\",\"latitude\": \(coordinate.latitude), \"longitude\": \(coordinate.longitude)}".data(using: .utf8)
         let session = URLSession.shared
         let task = session.dataTask(with: request) {data, response, error in
@@ -86,11 +85,11 @@ class func postSession(email: String, password : String, completion: @escaping([
     }
   
    class func getStudentLocation (completion: @escaping ([StudentLocation]?, Error?) -> ()) {
-           var request = URLRequest (url: URL (string: "https://onthemap-api.udacity.com/v1/StudentLocation")!)
+    var request = URLRequest (url: URL (string: API.MAIN + "StudentLocation")!)
+    
+    request.addValue(API.HeaderValues.PARSE_APP_ID, forHTTPHeaderField: API.HeaderKeys.PARSE_APP_ID)
            
-           request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
-           
-           request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
+           request.addValue(API.HeaderValues.PARSE_APP_KEY, forHTTPHeaderField: API.HeaderKeys.PARSE_APP_KEY)
            
            let session = URLSession.shared
            let task = session.dataTask(with: request) {data, response, error in
