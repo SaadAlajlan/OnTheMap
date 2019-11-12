@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct StudentLocation : Codable {
+struct StudentLocation : Codable, Equatable {
   let createdAt : String?
     let firstName : String?
     let lastName : String?
