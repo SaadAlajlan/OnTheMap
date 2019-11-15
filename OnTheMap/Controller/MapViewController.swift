@@ -47,18 +47,26 @@ class MapViewController: UIViewController, MKMapViewDelegate {
          
     @objc func reloadTapped() {
                       
-    
+   mapView.removeAnnotations(annotations)
+     annotations.removeAll()
+     ParseClient.Auth.userList.removeAll()
+    ParseClient.getLocations(url: URL(string: API.MAIN + "StudentLocation?limit=100&order=-updatedAt")!, completion: handleLocationsResponse(data:error:))
            
             }
       
     @objc func addLocationTapped() {
-//
+
+        
     }
       
     @objc func logoutTapped() {
-                            
+                           
+        ParseClient.Auth.key = ""
+                                
+        ParseClient.Auth.sessionId = ""
+                                  
+        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
            
-
               
                }
     func loadAllAnnotations(){
@@ -89,13 +97,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
         
         
-        
+   
     func locations(){
         ParseClient.getLocations(url: URL(string: API.MAIN + "StudentLocation?limit=100&order=-updatedAt")!, completion: handleLocationsResponse(data:error:))
-                         DispatchQueue.main.async {
-                             
-                           
-    }
         }
     
 
@@ -120,9 +124,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                return pinView
            }
            
-           // This delegate method is implemented to respond to taps. It opens the system browser
-           // to the URL specified in the annotationViews subtitle property.
-        
+           
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
                
                if control == view.rightCalloutAccessoryView {

@@ -18,8 +18,7 @@ class LoginViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-//        emailTextField.text = ""
-//        passwordTextField.text = ""
+
     }
     @IBAction func loginC(_ sender: Any) {
         if emailTextField.text != "" && passwordTextField.text != ""{

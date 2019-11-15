@@ -21,7 +21,6 @@
 		93812067236351DE00B49301 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93812066236351DE00B49301 /* MapViewController.swift */; };
 		93812069236351FF00B49301 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93812068236351FF00B49301 /* TableViewController.swift */; };
 		9381206C236361FE00B49301 /* ParseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9381206B236361FE00B49301 /* ParseClient.swift */; };
-		9381206E2363636700B49301 /* ParseResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9381206D2363636700B49301 /* ParseResponse.swift */; };
 		938120702363769400B49301 /* StudentLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9381206F2363769400B49301 /* StudentLocations.swift */; };
 		93E2DA51237B3DFB00D9A6E8 /* studentsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93E2DA50237B3DFB00D9A6E8 /* studentsData.swift */; };
 /* End PBXBuildFile section */
@@ -43,7 +42,6 @@
 		93812066236351DE00B49301 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		93812068236351FF00B49301 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		9381206B236361FE00B49301 /* ParseClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseClient.swift; sourceTree = "<group>"; };
-		9381206D2363636700B49301 /* ParseResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseResponse.swift; sourceTree = "<group>"; };
 		9381206F2363769400B49301 /* StudentLocations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentLocations.swift; sourceTree = "<group>"; };
 		93E2DA50237B3DFB00D9A6E8 /* studentsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = studentsData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -147,7 +145,6 @@
 			isa = PBXGroup;
 			children = (
 				9381206F2363769400B49301 /* StudentLocations.swift */,
-				9381206D2363636700B49301 /* ParseResponse.swift */,
 				937A9013237F160700DEDCA2 /* LoginResponse.swift */,
 				937A9017237F1DCB00DEDCA2 /* userResponse.swift */,
 			);
@@ -242,7 +239,6 @@
 				9381205B23634D9100B49301 /* LoginViewController.swift in Sources */,
 				937A9012237F153700DEDCA2 /* sessionRequest.swift in Sources */,
 				93812042236312AC00B49301 /* AppDelegate.swift in Sources */,
-				9381206E2363636700B49301 /* ParseResponse.swift in Sources */,
 				93E2DA51237B3DFB00D9A6E8 /* studentsData.swift in Sources */,
 				93812044236312AC00B49301 /* SceneDelegate.swift in Sources */,
 				93812069236351FF00B49301 /* TableViewController.swift in Sources */,

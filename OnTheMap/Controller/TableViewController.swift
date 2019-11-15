@@ -17,7 +17,8 @@ class TableViewController: UIViewController{
     
    
     override func viewDidLoad() {
-         super.viewDidLoad()
+      
+        super.viewDidLoad()
         barItems()
     
    
@@ -25,34 +26,42 @@ class TableViewController: UIViewController{
      
     override func viewWillAppear(_ animated: Bool) {
 
-         super.viewWillAppear(animated)
-
-
-              self.tableView!.reloadData()
+         
+        super.viewWillAppear(animated)
+        locations()
+        self.tableView!.reloadData()
          
      }
 
     
     func barItems(){
-           let reload = UIBarButtonItem(image:#imageLiteral(resourceName: "reload"),style: .plain, target: self, action: #selector(reloadTapped))
-           let location = UIBarButtonItem(image:#imageLiteral(resourceName: "Web.png"), style: .plain, target: self, action: #selector(addLocationTapped))
-            let logout = UIBarButtonItem(title: "LOGOUT", style: .plain, target: self, action: #selector(logoutTapped))
+          
+        let reload = UIBarButtonItem(image:#imageLiteral(resourceName: "reload"),style: .plain, target: self, action: #selector(reloadTapped))
+          
+        let location = UIBarButtonItem(image:#imageLiteral(resourceName: "Web.png"), style: .plain, target: self, action: #selector(addLocationTapped))
+            
+        let logout = UIBarButtonItem(title: "LOGOUT", style: .plain, target: self, action: #selector(logoutTapped))
            
            
 
           
         navigationItem.title = "OnTheMap"
+        
         navigationItem.rightBarButtonItems = [reload, location]
+        
         reload.tintColor = .gray
+        
         location.tintColor = .gray
+      
         navigationItem.leftBarButtonItem = logout
+      
         logout.tintColor = .gray
        }
    
     @objc func reloadTapped() {
                       
-             
-        
+                ParseClient.getLocations(url: URL(string: API.MAIN + "StudentLocation?limit=100&order=-updatedAt")!, completion: handleLocationsResponse(data:error:))
+                            
          }
    
     @objc func addLocationTapped() {
@@ -61,12 +70,32 @@ class TableViewController: UIViewController{
          }
    
     @objc func logoutTapped() {
-                         
-        
-
+                
+        ParseClient.Auth.key = ""
+          
+        ParseClient.Auth.sessionId = ""
+       
+        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+                            
            
             }
    
+        func handleLocationsResponse(data: StudentLocations?, error: Error?){
+             if let data = data{
+                 ParseClient.Auth.userList.removeAll()
+                 for user in data.results{
+                     ParseClient.Auth.userList.append(user)
+                 }
+                 tableView.reloadData()
+             }
+             else{
+                 self.popupAlert(topic: "Download Failed", message: error?.localizedDescription ?? "")
+             }
+         }
+   func locations(){
+             ParseClient.getLocations(url: URL(string: API.MAIN + "StudentLocation?limit=100&order=-updatedAt")!, completion: handleLocationsResponse(data:error:))
+               
+}
 }
 extension TableViewController: UITableViewDataSource, UITableViewDelegate {
     
