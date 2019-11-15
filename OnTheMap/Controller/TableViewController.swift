@@ -17,6 +17,13 @@ class TableViewController: UIViewController{
     
     override func viewDidLoad() {
          super.viewDidLoad()
+      //  navigationItem.rightBarButtonItem = UIBarButtonItem(title: "+", style: .plain, target: self, action: #selector(startOver))
+       let reload = UIBarButtonItem(image:#imageLiteral(resourceName: "reload"),style: .plain, target: self, action: #selector(addTapped))
+        let location = UIBarButtonItem(image:#imageLiteral(resourceName: "Web.png"), style: .plain, target: self, action: #selector(playTapped))
+        
+        
+
+        navigationItem.rightBarButtonItems = [reload, location]
         }
      override func viewWillAppear(_ animated: Bool) {
 
@@ -26,6 +33,36 @@ class TableViewController: UIViewController{
               self.tableView!.reloadData()
          
      }
+//    @objc func startOver() {
+//
+//            let storyboard = UIStoryboard (name: "Main", bundle: nil)
+//            let resultVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+//            navigationController!.pushViewController(resultVC, animated: true)
+////         self.tabBarController?.tabBar.isHidden = true
+//
+//
+//
+//     }
+     @objc func playTapped() {
+                      
+                let storyboard = UIStoryboard (name: "Main", bundle: nil)
+                let resultVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+                navigationController!.pushViewController(resultVC, animated: true)
+    //         self.tabBarController?.tabBar.isHidden = true
+                    
+
+        
+         }
+     @objc func addTapped() {
+                      
+                let storyboard = UIStoryboard (name: "Main", bundle: nil)
+                let resultVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+                navigationController!.pushViewController(resultVC, animated: true)
+    //         self.tabBarController?.tabBar.isHidden = true
+                    
+
+        
+         }
    
 }
 extension TableViewController: UITableViewDataSource, UITableViewDelegate {
@@ -35,7 +72,7 @@ extension TableViewController: UITableViewDataSource, UITableViewDelegate {
      
      func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
       
-        return 100
+        return (stuedentsData.students?.results.count)!
      }
      
      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -46,7 +83,7 @@ extension TableViewController: UITableViewDataSource, UITableViewDelegate {
         let loc = stuedentsData.students!.results[indexPath.row]
          
         cell.textLabel?.text = loc.lastName! + " " + loc.firstName!
-         cell.imageView?.image = UIImage(named: "loc")
+         cell.imageView?.image = #imageLiteral(resourceName: "1024")
         
                  
          

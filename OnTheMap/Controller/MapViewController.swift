@@ -17,6 +17,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
        override func viewDidLoad() {
                super.viewDidLoad()
                mapView.delegate = self
+        let reload = UIBarButtonItem(image:#imageLiteral(resourceName: "reload"),style: .plain, target: self, action: #selector(addTapped))
+        let location = UIBarButtonItem(image:#imageLiteral(resourceName: "Web.png"), style: .plain, target: self, action: #selector(playTapped))
+        
+        
+
+        navigationItem.rightBarButtonItems = [reload, location]
            }
            
            override func viewWillAppear(_ animated: Bool) {
@@ -75,7 +81,26 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                    
                }//end getAllLocations
            }
-           
+           @objc func playTapped() {
+                                
+                          let storyboard = UIStoryboard (name: "Main", bundle: nil)
+                          let resultVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+                          navigationController!.pushViewController(resultVC, animated: true)
+              //         self.tabBarController?.tabBar.isHidden = true
+                              
+
+                  
+                   }
+               @objc func addTapped() {
+                                
+                          let storyboard = UIStoryboard (name: "Main", bundle: nil)
+                          let resultVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+                          navigationController!.pushViewController(resultVC, animated: true)
+              //         self.tabBarController?.tabBar.isHidden = true
+                              
+
+                  
+                   }
            func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
                
                let reuseId = "pin"
