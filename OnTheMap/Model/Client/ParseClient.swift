@@ -92,11 +92,11 @@ class func postSession(email: String, password : String, completion: @escaping(B
 
 
 
-    class func PostStudentLocation (link: String, coordinate: CLLocationCoordinate2D, location: String, completion: @escaping ( Error?) -> ()) {
+    class func PostStudentLocation (firstName: String, lastName: String,link: String, coordinate: CLLocationCoordinate2D, location: String, completion: @escaping ( Error?) -> ()) {
       var request = URLRequest (url: URL (string: API.MAIN + "StudentLocation")!)
        request.addValue(API.HeaderValues.PARSE_APP_ID, forHTTPHeaderField: API.HeaderKeys.PARSE_APP_ID)
         request.addValue(API.HeaderValues.PARSE_APP_KEY, forHTTPHeaderField: API.HeaderKeys.PARSE_APP_KEY)
-        request.httpBody = "{\"uniqueKey\": \"1234\", \"firstName\": \"John\", \"lastName\": \"Doe\",\"mapString\": \"\(location)\", \"mediaURL\": \"\(link)\",\"latitude\": \(coordinate.latitude), \"longitude\": \(coordinate.longitude)}".data(using: .utf8)
+        request.httpBody = "{\"uniqueKey\": \"1234\", \"firstName\": \(firstName)\", \"lastName\": \(lastName))\",\"mapString\": \"\(location)\", \"mediaURL\": \"\(link)\",\"latitude\": \(coordinate.latitude), \"longitude\": \(coordinate.longitude)}".data(using: .utf8)
         let session = URLSession.shared
         let task = session.dataTask(with: request) {data, response, error in
             if error != nil {

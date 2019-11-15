@@ -15,17 +15,15 @@ class TableViewController: UIViewController{
     @IBOutlet weak var tableView: UITableView!
     
     
+   
     override func viewDidLoad() {
          super.viewDidLoad()
-      //  navigationItem.rightBarButtonItem = UIBarButtonItem(title: "+", style: .plain, target: self, action: #selector(startOver))
-       let reload = UIBarButtonItem(image:#imageLiteral(resourceName: "reload"),style: .plain, target: self, action: #selector(addTapped))
-        let location = UIBarButtonItem(image:#imageLiteral(resourceName: "Web.png"), style: .plain, target: self, action: #selector(playTapped))
-        
-        
-
-        navigationItem.rightBarButtonItems = [reload, location]
+        barItems()
+    
+   
         }
-     override func viewWillAppear(_ animated: Bool) {
+     
+    override func viewWillAppear(_ animated: Bool) {
 
          super.viewWillAppear(animated)
 
@@ -33,49 +31,57 @@ class TableViewController: UIViewController{
               self.tableView!.reloadData()
          
      }
-//    @objc func startOver() {
-//
-//            let storyboard = UIStoryboard (name: "Main", bundle: nil)
-//            let resultVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-//            navigationController!.pushViewController(resultVC, animated: true)
-////         self.tabBarController?.tabBar.isHidden = true
-//
-//
-//
-//     }
-     @objc func playTapped() {
-                      
-                let storyboard = UIStoryboard (name: "Main", bundle: nil)
-                let resultVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-                navigationController!.pushViewController(resultVC, animated: true)
-    //         self.tabBarController?.tabBar.isHidden = true
-                    
 
-        
-         }
-     @objc func addTapped() {
-                      
-                let storyboard = UIStoryboard (name: "Main", bundle: nil)
-                let resultVC = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-                navigationController!.pushViewController(resultVC, animated: true)
-    //         self.tabBarController?.tabBar.isHidden = true
-                    
+    
+    func barItems(){
+           let reload = UIBarButtonItem(image:#imageLiteral(resourceName: "reload"),style: .plain, target: self, action: #selector(reloadTapped))
+           let location = UIBarButtonItem(image:#imageLiteral(resourceName: "Web.png"), style: .plain, target: self, action: #selector(addLocationTapped))
+            let logout = UIBarButtonItem(title: "LOGOUT", style: .plain, target: self, action: #selector(logoutTapped))
+           
+           
 
+          
+        navigationItem.title = "OnTheMap"
+        navigationItem.rightBarButtonItems = [reload, location]
+        reload.tintColor = .gray
+        location.tintColor = .gray
+        navigationItem.leftBarButtonItem = logout
+        logout.tintColor = .gray
+       }
+   
+    @objc func reloadTapped() {
+                      
+             
         
          }
    
+    @objc func addLocationTapped() {
+                      
+          
+         }
+   
+    @objc func logoutTapped() {
+                         
+        
+
+           
+            }
+   
 }
 extension TableViewController: UITableViewDataSource, UITableViewDelegate {
-     func numberOfSections(in tableView: UITableView) -> Int {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
          return 1
      }
      
-     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
       
         return (stuedentsData.students?.results.count)!
      }
      
-     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
       
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Pins")!
@@ -91,7 +97,8 @@ extension TableViewController: UITableViewDataSource, UITableViewDelegate {
          return cell
      }
      
-     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let loc = stuedentsData.students!.results[indexPath.row]
         guard let url = URL(string: loc.mediaURL!) else { return }
         UIApplication.shared.open(url)
