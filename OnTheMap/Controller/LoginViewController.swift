@@ -22,65 +22,53 @@ class LoginViewController: UIViewController {
 //        passwordTextField.text = ""
     }
     @IBAction func loginC(_ sender: Any) {
-             let username = emailTextField.text!
-             let password = passwordTextField.text!
-             
-             if (username.isEmpty) || (password.isEmpty) {
-                 
-                 let requiredInfoAlert = UIAlertController (title: "Fill the required fields", message: "Please fill both the email and password", preferredStyle: .alert)
-                 
-                 requiredInfoAlert.addAction(UIAlertAction (title: "OK", style: .default, handler: { _ in
-                     return
-                 }))
-                 
-                 self.present (requiredInfoAlert, animated: true, completion: nil)
-                 
-             } else {
-                 
-                 ParseClient.postSession(email: username, password: password){(loginSuccess, key, error) in
-                     //TODO: Execute the entire code inside the completion body on the main thread asynchronous
-                     DispatchQueue.main.async {
-                         
-                         if error != nil {
-                             let errorAlert = UIAlertController(title: "Erorr performing request", message: "There was an error performing your request", preferredStyle: .alert )
-                             
-                             errorAlert.addAction(UIAlertAction (title: "OK", style: .default, handler: { _ in
-                                 return
-                             }))
-                             self.present(errorAlert, animated: true, completion: nil)
-                             return
-                         }
-                         
-                         if !loginSuccess {
-                             let loginAlert = UIAlertController(title: "Erorr logging in", message: "incorrect email or password", preferredStyle: .alert )
-                             
-                             loginAlert.addAction(UIAlertAction (title: "OK", style: .default, handler: { _ in
-                                 return
-                             }))
-                             self.present(loginAlert, animated: true, completion: nil)
-                         } else {
-                             let controller = self.storyboard?.instantiateViewController(withIdentifier: "MapViewController") as! MapViewController
-                             self.navigationController!.pushViewController(controller, animated: true)
-                             //In on the map, you need to use the key to call a function in the API class to get the user's first name and last name, but here we're just printing the key. So, in your app, instead of printing it, you'll call that function and be passing it as an argument to that function.
-                            
-                             print ("the key is \(key)")
-                         }
-                     }}
-             }
+        if emailTextField.text != "" && passwordTextField.text != ""{
+                   self.setActivityIndicator(isOn: true)
+            ParseClient.request(username: emailTextField.text!, password: passwordTextField.text!) { (success, error) in
+                       self.setActivityIndicator(isOn: false)
+                       if success{
+                           DispatchQueue.main.async {
+//                            navigationController?.pushViewController("TabVC", animated: true)
+//
+                           }
+                       }
+                       else{
+                           self.popupAlert(topic: nil, message: error?.localizedDescription ?? "")
+                       }
+                   }
+               }
+               else{
+                   self.popupAlert(topic: nil, message: "Empty Email or Password")
+               }
         }
+    func setActivityIndicator(isOn: Bool){
+          if isOn{
+              self.activityIndicator.startAnimating()
+              UIApplication.shared.beginIgnoringInteractionEvents()
+          }
+          else{
+              self.activityIndicator.stopAnimating()
+              self.activityIndicator.hidesWhenStopped = true
+              UIApplication.shared.endIgnoringInteractionEvents()
+          }
+      }
 
     }
-    //func setLoggingIn(_ loggingIn: Bool) {
-//           if loggingIn {
-//               activityIndicator.startAnimating()
-//           } else {
-//               activityIndicator.stopAnimating()
-//           }
-//           emailTextField.isEnabled = !loggingIn
-//           passwordTextField.isEnabled = !loggingIn
-//           loginButton.isEnabled = !loggingIn
-//
-//       }
+extension UIViewController{
+    func actionAlert(topic: String? = nil, message: String? = nil, complition: @escaping(UIAlertAction) -> Void){
+        let alert = UIAlertController(title: topic, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: complition))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func popupAlert(topic: String? = nil, message: String? = nil){
+        let alert = UIAlertController(title: topic, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+}
+
+  
    
        
 

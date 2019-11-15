@@ -77,7 +77,7 @@ extension TableViewController: UITableViewDataSource, UITableViewDelegate {
      
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
       
-        return (stuedentsData.students?.results.count)!
+        return ParseClient.Auth.userList.count
      }
      
     
@@ -86,9 +86,9 @@ extension TableViewController: UITableViewDataSource, UITableViewDelegate {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Pins")!
          
-        let loc = stuedentsData.students!.results[indexPath.row]
+        let loc = ParseClient.Auth.userList[indexPath.row]
          
-        cell.textLabel?.text = loc.lastName! + " " + loc.firstName!
+        cell.textLabel?.text = loc.lastName + " " + loc.firstName
          cell.imageView?.image = #imageLiteral(resourceName: "1024")
         
                  
@@ -99,8 +99,8 @@ extension TableViewController: UITableViewDataSource, UITableViewDelegate {
      
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let loc = stuedentsData.students!.results[indexPath.row]
-        guard let url = URL(string: loc.mediaURL!) else { return }
+        let loc = ParseClient.Auth.userList[indexPath.row]
+        guard let url = URL(string: loc.mediaURL) else { return }
         UIApplication.shared.open(url)
      }
 }

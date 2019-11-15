@@ -1,25 +1,17 @@
+////
+////  ParseResponse.swift
+////  OnTheMap
+////
+////  Created by Saad on 10/25/19.
+////  Copyright © 2019 saad. All rights reserved.
+////
 //
-//  ParseResponse.swift
-//  OnTheMap
+//import Foundation
 //
-//  Created by Saad on 10/25/19.
-//  Copyright © 2019 saad. All rights reserved.
+//struct StudentLocations : Codable{
 //
-
-import Foundation
-
-struct StudentLocation : Codable, Equatable {
-  let createdAt : String?
-    let firstName : String?
-    let lastName : String?
-    let latitude : Double?
-    let longitude : Double?
-    let mapString : String?
-    let mediaURL : String?
-    let objectId : String?
-    let uniqueKey : String?
-    let updatedAt : String?
-    
-    
-}
-
+//    let results : [StudentLocation]
+//
+//}
+//
+//

@@ -11,131 +11,156 @@ import MapKit
 
 class ParseClient {
     
+    struct Auth {
+          static var userPosted = StudentLocation(createdAt: "", firstName: "", lastName: "", latitude: 0, longitude: 0, mapString: "", mediaURL: "", objectId: "", uniqueKey: "", updatedAt: "")
+          static var userList: [StudentLocation] = []
+          static var sessionId: String = ""
+          static var key = ""
+      }
     
-class func postSession(email: String, password : String, completion: @escaping(Bool, String, Error?) -> Void){
-    var request = URLRequest(url: URL(string: API.SESSION)!)
-              request.httpMethod = "POST"
-              request.addValue("application/json", forHTTPHeaderField: "Accept")
-              request.addValue("application.json", forHTTPHeaderField: "Content-Type")
-                request.httpBody = "{\"udacity\": {\"username\": \"\(email)\", \"password\": \"\(password)\"}}".data(using: .utf8)
-              let session = URLSession.shared
-    let task = session.dataTask(with: request) { data, response, error in
-                         if error != nil {
-                            
-                             completion (false, "", error)
-                             return
-                         }
-                         
-                         //Get the status code to check if the response is OK or not
-                         guard let statusCode = (response as? HTTPURLResponse)?.statusCode else {
-                             
-                          
-                             let statusCodeError = NSError(domain: NSURLErrorDomain, code: 0, userInfo: nil)
-                             
-                             completion (false, "", statusCodeError)
-                             return
-                         }
-                         
-                         
-                         
-                         if statusCode >= 200  && statusCode < 300 {
-                             
-                             //Skipping the first 5 characters
-                             let range = 5..<data!.count
-                             let newData = data?.subdata(in: range) /* subset response data! */
-                             
-                             //Print the data to see it and know you'll parse it (this can be removed after you complete building the app)
-                             print (String(data: newData!, encoding: .utf8)!)
-                             
-                             //TODO: Get an object based on the received data in JSON format
-                             let loginJsonObject = try! JSONSerialization.jsonObject(with: newData!, options: [])
-                             
-                             //TODO: Convert the object to a dictionary and call it loginDictionary
-                             let loginDictionary = loginJsonObject as? [String : Any]
-                             
-                             //Get the unique key of the user
-                             let accountDictionary = loginDictionary? ["account"] as? [String : Any]
-                             let uniqueKey = accountDictionary? ["key"] as? String ?? " "
-                             completion (true, uniqueKey, nil)
-                         } else {
-                             //TODO: call the completion handler properly
-                             completion (false, "", nil)
-                         }
-                     }
-                     //Start the task
-                     task.resume()
-    
-          }
-    
-    class func deleteSession(completion: @escaping (Error?) -> Void){
-        var request = URLRequest(url: URL(string: API.SESSION)!)
-        request.httpMethod = "DELETE"
-        var xsrfCookie: HTTPCookie? = nil
-        let sharedCookieStorage = HTTPCookieStorage.shared
-        for cookie in sharedCookieStorage.cookies! {
-          if cookie.name == "XSRF-TOKEN" { xsrfCookie = cookie }
+class func getLocations(url: URL, completion: @escaping (StudentLocations?, Error?) -> Void) {
+        taskForGetRequest(url: url, responseType: StudentLocations.self) { (response, error) in
+            if let response = response{
+                DispatchQueue.main.async {
+                    completion(response, nil)
+                }
+            }
+            else{
+                DispatchQueue.main.async {
+                    completion(nil, error)
+                }
+            }
         }
-        if let xsrfCookie = xsrfCookie {
-          request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
-        }
-        let session = URLSession.shared
-        let task = session.dataTask(with: request) { data, response, error in
-          if error != nil { // Handle error…
-              return
-          }
-          let range = 5..<data!.count
-          let newData = data?.subdata(in: range) /* subset response data! */
-          print(String(data: newData!, encoding: .utf8)!)
-        }
-        task.resume()
     }
+    
+    class func request(username: String, password: String, completion: @escaping (Bool, Error?) -> Void){
+        let loginSession = LoginSession(udacity: SessionRequest(username: username, password: password))
+        
+        taskForPostRequest(url: URL(string: API.SESSION)!, responseType: LoginResponse.self, body: loginSession) { (response, error) in
+            if let response = response{
+                Auth.sessionId = response.session.id
+                Auth.key = response.account.key
+                DispatchQueue.main.async {
+                    completion(true, nil)
+                }
+            }
+            else{
+                DispatchQueue.main.async {
+                    completion(false, error)
+                }
+            }
+        }
+    }
+    
 
-
-
-    class func PostStudentLocation (firstName: String, lastName: String,link: String, coordinate: CLLocationCoordinate2D, location: String, completion: @escaping ( Error?) -> ()) {
-      var request = URLRequest (url: URL (string: API.MAIN + "StudentLocation")!)
-       request.addValue(API.HeaderValues.PARSE_APP_ID, forHTTPHeaderField: API.HeaderKeys.PARSE_APP_ID)
-        request.addValue(API.HeaderValues.PARSE_APP_KEY, forHTTPHeaderField: API.HeaderKeys.PARSE_APP_KEY)
-        request.httpBody = "{\"uniqueKey\": \"1234\", \"firstName\": \(firstName)\", \"lastName\": \(lastName))\",\"mapString\": \"\(location)\", \"mediaURL\": \"\(link)\",\"latitude\": \(coordinate.latitude), \"longitude\": \(coordinate.longitude)}".data(using: .utf8)
-        let session = URLSession.shared
-        let task = session.dataTask(with: request) {data, response, error in
-            if error != nil {
-                
-                completion (error)
+    
+    class func taskForGetRequest<ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, completion: @escaping (ResponseType?, Error?) -> Void){
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data else {
+                DispatchQueue.main.async {
+                    completion(nil, error)
+                }
                 return
             }
-         
-              
-         completion ( nil)
+//
+            do{
+                let responseObject = try JSONDecoder().decode(ResponseType.self, from: data)
+                DispatchQueue.main.async {
+                    completion(responseObject, nil)
+                }
             }
-        
-        
+            catch{
+                do{
+                    let errorResponse = try JSONDecoder().decode(ClientError.self, from: data)
+                    DispatchQueue.main.async {
+                        completion(nil, errorResponse)
+                    }
+                }
+                catch{
+                    DispatchQueue.main.async {
+                        completion(nil, error)
+                    }
+                }
+            }
+        }
         task.resume()
     }
-  
-   class func getStudentLocation (completion: @escaping ([StudentLocation]?, Error?) -> ()) {
-    var request = URLRequest (url: URL (string: API.MAIN + "StudentLocation")!)
     
-    request.addValue(API.HeaderValues.PARSE_APP_ID, forHTTPHeaderField: API.HeaderKeys.PARSE_APP_ID)
-           
-           request.addValue(API.HeaderValues.PARSE_APP_KEY, forHTTPHeaderField: API.HeaderKeys.PARSE_APP_KEY)
-           
-           let session = URLSession.shared
-           let task = session.dataTask(with: request) {data, response, error in
-               if error != nil {
-                   
-                   completion (nil, error)
-                   return
-               }
-            
-                   let studentsLocations = try! JSONDecoder().decode(StudentLocations.self, from: data!)
-            stuedentsData.students = studentsLocations
-            completion (studentsLocations.results, nil)
-               }
-           
-           
-           task.resume()
-       }
+//    class func postLocation(completion: @escaping (Bool, Error?) -> Void){
+//        let locationRequest = AddLocationRequest(uniqueKey: Auth.key, firstName: "Saad", lastName: "Alajlan", mapString: Auth.userPosted.mapString, mediaURL: Auth.userPosted.mediaURL, latitude: Auth.userPosted.latitude, longitude: Auth.userPosted.longitude)
+//        print("LocationData = \(Auth.userPosted)")
+//        let body = try? JSONEncoder().encode(locationRequest)
+//        
+//        var request = URLRequest(url: URL(string: API.MAIN + "StudentLocation")!)
+//        request.httpMethod = "POST"
+//        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+//        request.httpBody = body
+//        
+//        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+//            guard let data = data else {
+//                DispatchQueue.main.async {
+//                    completion(false, error)
+//                }
+//                return
+//            }
+//            do{
+//                let resposeObject = try JSONDecoder().decode(AddLocationResponse.self, from: data)
+//                DispatchQueue.main.async {
+//                    completion(true,nil)
+//                }
+//            }
+//            catch{
+//                DispatchQueue.main.async {
+//                    completion(false, error)
+//                }
+//            }
+//        }
+//        task.resume()
+//    }
+    
+    class func taskForPostRequest<RequestType: Encodable, ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, body: RequestType, completion: @escaping (ResponseType?, Error?) -> Void){
+        let data = try? JSONEncoder().encode(body)
+        guard let body = data else {
+            return
+        }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = body
+        
+        let task = URLSession.shared.dataTask(with: request) { originalData, reponse, error in
+            guard let originalData = originalData else{
+                DispatchQueue.main.async {
+                    completion(nil, error)
+                }
+                return
+            }
+            let range = (5..<originalData.count)
+            let data = originalData.subdata(in: range)
+            let decoder = JSONDecoder()
+            do{
+                let responseObject = try decoder.decode(ResponseType.self, from: data)
+                DispatchQueue.main.async {
+                    completion(responseObject, nil)
+                }
+            }
+            catch{
+                do{
+                    let errorResponse = try JSONDecoder().decode(ClientError.self, from: data)
+                    DispatchQueue.main.async {
+                        completion(nil, errorResponse)
+                    }
+                }
+                catch{
+                    DispatchQueue.main.async {
+                        completion(nil, error)
+                    }
+                }
+            }
+        }
+        task.resume()
+    }
 }
    
 

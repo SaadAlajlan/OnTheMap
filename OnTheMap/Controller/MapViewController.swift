@@ -14,6 +14,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         @IBOutlet weak var mapView: MKMapView!
         
+    var annotationView: MKAnnotationView?
+    var annotations: [MKAnnotation] = []
+    var selectLink = ""
     
     override func viewDidLoad() {
                super.viewDidLoad()
@@ -49,21 +52,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             }
       
     @objc func addLocationTapped() {
-//       let long = CLLocationDegrees (coordinate.longitude)
-//             
-//             let lat = CLLocationDegrees (coordinate.latitude)
-//              let coords = CLLocationCoordinate2D (latitude: lat, longitude: long)
-//        let mediaURL = mediaURL
-//                                             
-//                                             
-//             let first = firstName
-//                                             
-//                                            
-//             let last =  lastName
-//                 
-//        ParseClient.PostStudentLocation(link: mediaURL, coordinate: coords, location: <#T##String#>, completion: <#T##(Error?) -> ()#>)
-             
-            }
+//
+    }
       
     @objc func logoutTapped() {
                             
@@ -71,82 +61,46 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 
               
                }
-    func locations(){
-        ParseClient.getStudentLocation{(studentsLocations, error) in
-                         DispatchQueue.main.async {
-                             
-                             if error != nil {
-                                 let errorAlert = UIAlertController(title: "Erorr performing request", message: "There was an error performing your request", preferredStyle: .alert )
-                                 
-                                 errorAlert.addAction(UIAlertAction (title: "OK", style: .default, handler: { _ in
-                                     return
-                                 }))
-                                 self.present(errorAlert, animated: true, completion: nil)
-                                 return
-                             }
-                             
-                             var annotations = [MKPointAnnotation] ()
-                             
-                             guard let locationsArray = studentsLocations else {
-                                 let locationsErrorAlert = UIAlertController(title: "Erorr loading locations", message: "There was an error loading locations", preferredStyle: .alert )
-                                 
-                                 locationsErrorAlert.addAction(UIAlertAction (title: "OK", style: .default, handler: { _ in
-                                     return
-                                 }))
-                                 self.present(locationsErrorAlert, animated: true, completion: nil)
-                                 return
-                             }
-                             
-                             
-                             for locationStruct in locationsArray {
-                                 
-                                 let long = CLLocationDegrees (locationStruct.longitude ?? 0)
-                                 let lat = CLLocationDegrees (locationStruct.latitude ?? 0)
-                                 
-                                 let coords = CLLocationCoordinate2D (latitude: lat, longitude: long)
-                                 
-                                 
-                                 let mediaURL = locationStruct.mediaURL ?? " "
-                                 
-                                 
-                                 let first = locationStruct.firstName ?? " "
-                                 
-                                
-                                 let last = locationStruct.lastName ?? " "
-                                 
-                                 // Here we create the annotation and set its coordiate, title, and subtitle properties
-                                 let annotation = MKPointAnnotation()
-                                 annotation.coordinate = coords
-                                 annotation.title = "\(first) \(last)"
-                                 annotation.subtitle = mediaURL
-                                 
-                                 annotations.append (annotation)
-                             }
-                             self.mapView.addAnnotations (annotations)
-                         }
-                         
-                     }//end parse
+    func loadAllAnnotations(){
+    for location in ParseClient.Auth.userList{
+        let annotation = MKPointAnnotation()
+        annotation.title = "\(location.firstName) \(location.lastName)"
+        annotation.subtitle = location.mediaURL
+        annotation.coordinate = CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
+        annotations.append(annotation)
+    }
     }
     
-//    func addNewLocation(firstName: String, lastName: String, mediaURL: String,coordinate: CLLocationCoordinate2D){
-//
-//        var annotations = [MKPointAnnotation] ()
-//
-//
-//
-//
-//
-//        let annotation = MKPointAnnotation()
-//
-//        annotation.coordinate = coords
-//
-//        annotation.title = "\(first) \(last)"
-//
-//        annotation.subtitle = mediaURL
-//
-//        annotations.append (annotation)
-//    }
-          
+        
+        
+        
+    func handleLocationsResponse(data: StudentLocations?, error: Error?){
+        if let data = data{
+            ParseClient.Auth.userList.removeAll()
+            for user in data.results{
+                ParseClient.Auth.userList.append(user)
+            }
+            self.loadAllAnnotations()
+            self.mapView.addAnnotations(self.annotations)
+        }
+        else{
+            self.popupAlert(topic: "Download Failed", message: error?.localizedDescription ?? "")
+        }
+    }
+        
+        
+        
+    func locations(){
+        ParseClient.getLocations(url: URL(string: API.MAIN + "StudentLocation?limit=100&order=-updatedAt")!, completion: handleLocationsResponse(data:error:))
+                         DispatchQueue.main.async {
+                             
+                           
+    }
+        }
+    
+
+         
+    
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
                
                let reuseId = "pin"
@@ -178,4 +132,5 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                    }
                }
            }
-       }
+       
+}
