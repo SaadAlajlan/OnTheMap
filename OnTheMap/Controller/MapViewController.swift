@@ -26,7 +26,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
            
          
     override func viewWillAppear(_ animated: Bool) {
-          locations()
+         self.tabBarController?.tabBar.isHidden = false
+        locations()
            }
     
     func barItems(){
@@ -56,7 +57,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
       
     @objc func addLocationTapped() {
 
-        
+        let storyboard = UIStoryboard (name: "Main", bundle: nil)
+                        
+            let resultVC = storyboard.instantiateViewController(withIdentifier: "NewLocationViewController") as! NewLocationViewController
+                                    
+            navigationController!.pushViewController(resultVC, animated: true)
+        self.tabBarController?.tabBar.isHidden = true
     }
       
     @objc func logoutTapped() {

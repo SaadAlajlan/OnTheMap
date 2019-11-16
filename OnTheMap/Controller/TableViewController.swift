@@ -25,10 +25,10 @@ class TableViewController: UIViewController{
         }
      
     override func viewWillAppear(_ animated: Bool) {
-
-         
         super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = false
         locations()
+        
         self.tableView!.reloadData()
          
      }
@@ -65,7 +65,13 @@ class TableViewController: UIViewController{
          }
    
     @objc func addLocationTapped() {
-                      
+                  
+        let storyboard = UIStoryboard (name: "Main", bundle: nil)
+                    
+        let resultVC = storyboard.instantiateViewController(withIdentifier: "NewLocationViewController") as! NewLocationViewController
+                                
+        navigationController!.pushViewController(resultVC, animated: true)
+        self.tabBarController?.tabBar.isHidden = true
           
          }
    

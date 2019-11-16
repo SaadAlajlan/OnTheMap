@@ -20,6 +20,12 @@ class LoginViewController: UIViewController {
         
 
     }
+    @IBAction func signUp(_ sender: Any) {
+        guard let url = URL(string: "https://www.udacity.com/account/auth#!/signup") else { return }
+        UIApplication.shared.open(url)
+        
+        
+    }
     @IBAction func loginC(_ sender: Any) {
         if emailTextField.text != "" && passwordTextField.text != ""{
                    self.setActivityIndicator(isOn: true)
@@ -27,8 +33,8 @@ class LoginViewController: UIViewController {
                        self.setActivityIndicator(isOn: false)
                        if success{
                            DispatchQueue.main.async {
-//                            navigationController?.pushViewController("TabVC", animated: true)
-//
+
+                            self.performSegue(withIdentifier: "showTabBar", sender: self)
                            }
                        }
                        else{
