@@ -20,6 +20,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     override func viewDidLoad() {
                super.viewDidLoad()
+
                mapView.delegate = self
                barItems()
            }
@@ -105,7 +106,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
    
     func locations(){
-        ParseClient.getLocations(url: URL(string: API.MAIN + "StudentLocation?limit=100&order=-updatedAt")!, completion: handleLocationsResponse(data:error:))
+        ParseClient.getLocations(url: URL(string: API.ParamaterKeys.limit + "=100&"+API.ParamaterKeys.order+"=-updatedAt")!, completion: handleLocationsResponse(data:error:))
         }
     
 

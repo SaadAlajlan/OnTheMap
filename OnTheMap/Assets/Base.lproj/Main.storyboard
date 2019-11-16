@@ -10,11 +10,15 @@
         <!--TableViewController-->
         <scene sceneID="CeK-uA-VKk">
             <objects>
-                <tableViewController storyboardIdentifier="TableViewController" title="TableViewController" id="JxU-AL-mDo" customClass="TableViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="TableViewController" title="TableViewController" wantsFullScreenLayout="YES" id="JxU-AL-mDo" customClass="TableViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Tn1-Mr-ylE">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="716"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" systemColor="separatorColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="separatorColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="sectionIndexBackgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="sectionIndexTrackingBackgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="Pins" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Pins" id="QXf-oB-hYr">
                                 <rect key="frame" x="0.0" y="28" width="414" height="43.666667938232422"/>
@@ -23,6 +27,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.666667938232422"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -45,10 +50,10 @@
         <!--Item-->
         <scene sceneID="fA0-oL-FYm">
             <objects>
-                <navigationController id="Wv8-99-0FT" sceneMemberID="viewController">
+                <navigationController wantsFullScreenLayout="YES" id="Wv8-99-0FT" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="yaZ-le-Lt6"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Vrk-Er-WVE" userLabel="OnTheMap">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -62,13 +67,13 @@
         <!--MapViewController-->
         <scene sceneID="03V-FY-CcV">
             <objects>
-                <viewController storyboardIdentifier="MapViewController" title="MapViewController" id="JJg-9s-9wh" customClass="MapViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MapViewController" title="MapViewController" wantsFullScreenLayout="YES" id="JJg-9s-9wh" customClass="MapViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GBg-dU-eBU">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="716"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="3JF-Ut-X6F">
-                                <rect key="frame" x="0.0" y="56" width="414" height="611"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="643"/>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -97,7 +102,7 @@
         <!--Navigation Controller-->
         <scene sceneID="t2c-ky-PlA">
             <objects>
-                <navigationController id="7hk-Eu-WN5" sceneMemberID="viewController">
+                <navigationController wantsFullScreenLayout="YES" id="7hk-Eu-WN5" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="2Rn-2p-d2G">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -113,7 +118,7 @@
         <!--New Location View Controller-->
         <scene sceneID="p5p-xS-UL9">
             <objects>
-                <viewController storyboardIdentifier="NewLocationViewController" id="Bza-kt-yQN" customClass="NewLocationViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NewLocationViewController" wantsFullScreenLayout="YES" id="Bza-kt-yQN" customClass="NewLocationViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="EJU-9h-PUL">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -124,14 +129,14 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xpc-oW-6zX">
+                            <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xpc-oW-6zX">
                                 <rect key="frame" x="124" y="597" width="166" height="38"/>
-                                <color key="backgroundColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Find on the Map">
+                                <state key="normal" title="Find on the Map" image="magnifyingglass" catalog="system">
                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="H2Y-DM-qTq" kind="show" id="C29-5a-gBe"/>
+                                    <action selector="findOnTheMap:" destination="Bza-kt-yQN" eventType="touchUpInside" id="I5J-UE-mpz"/>
+                                    <segue destination="H2Y-DM-qTq" kind="show" identifier="ShowLocation" id="C29-5a-gBe"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Where are you studying today?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aik-Eh-IXb">
@@ -163,16 +168,17 @@
                     <navigationItem key="navigationItem" id="pfa-ri-Xsp"/>
                     <connections>
                         <outlet property="FindLocation" destination="T0R-wh-7iX" id="pFL-GO-vQK"/>
+                        <outlet property="locationField" destination="T0R-wh-7iX" id="iti-jU-Z5w"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oQE-CZ-JNB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3248" y="212"/>
         </scene>
-        <!--View Controller-->
+        <!--Locate On The Map View Controller-->
         <scene sceneID="fwh-SC-2Is">
             <objects>
-                <viewController id="H2Y-DM-qTq" sceneMemberID="viewController">
+                <viewController id="H2Y-DM-qTq" customClass="LocateOnTheMapViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PdI-9i-OmH">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -186,12 +192,15 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ONf-nj-9jk">
+                            <button opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ONf-nj-9jk">
                                 <rect key="frame" x="155" y="595" width="103" height="31"/>
-                                <color key="backgroundColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Submit">
+                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <state key="normal" title="Submit" image="paperplane.fill" catalog="system">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
+                                <connections>
+                                    <action selector="submit:" destination="H2Y-DM-qTq" eventType="touchUpInside" id="x3G-bD-G8y"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -216,6 +225,10 @@
                         <viewLayoutGuide key="safeArea" id="rXG-GU-kDa"/>
                     </view>
                     <navigationItem key="navigationItem" id="odU-XW-vQR"/>
+                    <connections>
+                        <outlet property="mapView" destination="Nb1-2P-LQB" id="ZlA-35-K33"/>
+                        <outlet property="urlField" destination="btr-cP-po8" id="Yul-IO-Wd2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fkk-N9-fMI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -229,7 +242,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="aJo-RS-Kr7">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-u" translatesAutoresizingMaskIntoConstraints="NO" id="aJo-RS-Kr7">
                                 <rect key="frame" x="105" y="41" width="204" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="5Tv-gM-rD9"/>
@@ -264,7 +277,7 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="              Don't have an account?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W3F-KC-zPZ">
                                                 <rect key="frame" x="0.0" y="0.0" width="240.66666666666666" height="33"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5qK-b7-v13">
@@ -285,7 +298,7 @@
                                 <rect key="frame" x="197" y="488.33333333333331" width="20" height="20"/>
                             </activityIndicatorView>
                         </subviews>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="separatorColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="LVE-qS-kzM" firstAttribute="top" secondItem="m9r-Wz-xBA" secondAttribute="bottom" constant="41.333333333333314" id="3oN-OL-BcB"/>
                             <constraint firstItem="m9r-Wz-xBA" firstAttribute="leading" secondItem="TIf-Ac-Fcl" secondAttribute="leading" constant="16" id="EqC-U7-ueC"/>
@@ -307,7 +320,7 @@
                         <outlet property="emailTextField" destination="ghy-iv-aRd" id="7xZ-Lj-1Aa"/>
                         <outlet property="loginButton" destination="c1o-qQ-qmM" id="Zmz-OX-vT1"/>
                         <outlet property="passwordTextField" destination="sKC-I4-AkM" id="m3d-v6-q8Q"/>
-                        <segue destination="CpV-zq-jjo" kind="show" identifier="showTabBar" id="fPr-2Z-iHc"/>
+                        <segue destination="CpV-zq-jjo" kind="modal" identifier="showTabBar" modalPresentationStyle="fullScreen" id="fPr-2Z-iHc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GHl-X9-AC3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -317,12 +330,12 @@
         <!--OnTheMap-->
         <scene sceneID="L0W-3p-CZE">
             <objects>
-                <tabBarController storyboardIdentifier="TabVC" title="OnTheMap" id="CpV-zq-jjo" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabVC" title="OnTheMap" wantsFullScreenLayout="YES" id="CpV-zq-jjo" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="qAx-Rd-v3c"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="M71-Zp-Iob">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
                         <segue destination="Wv8-99-0FT" kind="relationship" relationship="viewControllers" id="rHD-SM-CPk"/>
@@ -336,10 +349,10 @@
         <!--Item-->
         <scene sceneID="6ao-rf-Xnf">
             <objects>
-                <navigationController id="Dud-M6-cb5" sceneMemberID="viewController">
+                <navigationController wantsFullScreenLayout="YES" id="Dud-M6-cb5" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="l7k-qd-Ax5"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="gBW-Jq-Pqt" userLabel="OnTheMap" customClass="OnTheMap">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -353,7 +366,9 @@
     </scenes>
     <resources>
         <image name="list.dash" catalog="system" width="64" height="42"/>
-        <image name="logo" width="53.333332061767578" height="53.333332061767578"/>
+        <image name="logo-u" width="62" height="62"/>
+        <image name="magnifyingglass" catalog="system" width="64" height="56"/>
         <image name="mappin.and.ellipse" catalog="system" width="58" height="64"/>
+        <image name="paperplane.fill" catalog="system" width="64" height="60"/>
     </resources>
 </document>

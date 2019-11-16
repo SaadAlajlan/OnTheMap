@@ -86,37 +86,37 @@ class func getLocations(url: URL, completion: @escaping (StudentLocations?, Erro
         task.resume()
     }
     
-//    class func postLocation(completion: @escaping (Bool, Error?) -> Void){
-//        let locationRequest = AddLocationRequest(uniqueKey: Auth.key, firstName: "Saad", lastName: "Alajlan", mapString: Auth.userPosted.mapString, mediaURL: Auth.userPosted.mediaURL, latitude: Auth.userPosted.latitude, longitude: Auth.userPosted.longitude)
-//        print("LocationData = \(Auth.userPosted)")
-//        let body = try? JSONEncoder().encode(locationRequest)
-//        
-//        var request = URLRequest(url: URL(string: API.MAIN + "StudentLocation")!)
-//        request.httpMethod = "POST"
-//        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-//        request.httpBody = body
-//        
-//        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-//            guard let data = data else {
-//                DispatchQueue.main.async {
-//                    completion(false, error)
-//                }
-//                return
-//            }
-//            do{
-//                let resposeObject = try JSONDecoder().decode(AddLocationResponse.self, from: data)
-//                DispatchQueue.main.async {
-//                    completion(true,nil)
-//                }
-//            }
-//            catch{
-//                DispatchQueue.main.async {
-//                    completion(false, error)
-//                }
-//            }
-//        }
-//        task.resume()
-//    }
+    class func postLocation(completion: @escaping (Bool, Error?) -> Void){
+        let locationRequest = AddLocationRequest(uniqueKey: Auth.key, firstName: "Saad", lastName: "Alajlan", mapString: Auth.userPosted.mapString, mediaURL: Auth.userPosted.mediaURL, latitude: Auth.userPosted.latitude, longitude: Auth.userPosted.longitude)
+        print("LocationData = \(Auth.userPosted)")
+        let body = try? JSONEncoder().encode(locationRequest)
+        
+        var request = URLRequest(url: URL(string: API.STUDENTS)!)
+        request.httpMethod = "POST"
+        request.addValue(API.HeaderValues.PARSE_APP_ID, forHTTPHeaderField: API.HeaderKeys.PARSE_APP_ID)
+        request.httpBody = body
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data else {
+                DispatchQueue.main.async {
+                    completion(false, error)
+                }
+                return
+            }
+            do{
+                let resposeObject = try JSONDecoder().decode(AddLocationResponse.self, from: data)
+                DispatchQueue.main.async {
+                    completion(true,nil)
+                }
+            }
+            catch{
+                DispatchQueue.main.async {
+                    completion(false, error)
+                }
+            }
+        }
+        task.resume()
+    }
     
     class func taskForPostRequest<RequestType: Encodable, ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, body: RequestType, completion: @escaping (ResponseType?, Error?) -> Void){
         let data = try? JSONEncoder().encode(body)
@@ -124,9 +124,9 @@ class func getLocations(url: URL, completion: @escaping (StudentLocations?, Erro
             return
         }
         var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpMethod = API.ParamaterKeys.POST
+        request.addValue(API.HeaderValues.PARSE_APP_ID, forHTTPHeaderField: API.HeaderKeys.PARSE_APP_KEY)
+         request.addValue(API.HeaderValues.PARSE_APP_ID, forHTTPHeaderField: API.HeaderKeys.PARSE_APP_ID)
         request.httpBody = body
         
         let task = URLSession.shared.dataTask(with: request) { originalData, reponse, error in

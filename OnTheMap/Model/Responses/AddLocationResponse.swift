@@ -1,8 +1,8 @@
 //
-//  addLocation.swift
+//  AddLocationResponse.swift
 //  OnTheMap
 //
-//  Created by Saad on 11/15/19.
+//  Created by Saad on 11/16/19.
 //  Copyright © 2019 saad. All rights reserved.
 //
 

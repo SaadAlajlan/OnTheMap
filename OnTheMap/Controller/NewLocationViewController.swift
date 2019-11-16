@@ -9,17 +9,29 @@
 import Foundation
 import UIKit
 
-class NewLocationViewController: UIViewController{
+class NewLocationViewController: UIViewController, UITextFieldDelegate{
     
     
+    @IBOutlet weak var locationField: UITextField!
     
     @IBOutlet weak var FindLocation: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-        hideKeyboardWhenTapAround()
+        locationField.delegate = self
     }
+    override func viewWillAppear(_ animated: Bool) {
+
+        super.viewWillAppear(animated)
+       
+    
+    }
+
     
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+          textField.resignFirstResponder()
+          return true
+      }
     @IBAction func findOnTheMap(_ sender: Any) {
         if FindLocation.text != "" {
             ParseClient.Auth.userPosted.mapString = FindLocation.text!
@@ -30,18 +42,5 @@ class NewLocationViewController: UIViewController{
             self.popupAlert(topic: nil, message: "Location and link cannot be empty")
         }
     }
-    @IBAction func cancelButton(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-    }
 }
-extension UIViewController{
-    func hideKeyboardWhenTapAround(){
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
-    }
-    
-    @objc func dismissKeyboard(){
-        view.endEditing(true)
-    }
-}
+

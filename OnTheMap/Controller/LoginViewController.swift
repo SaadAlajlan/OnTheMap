@@ -17,48 +17,73 @@ class LoginViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+      setActivityIndicator(isOn: false)
 
     }
     @IBAction func signUp(_ sender: Any) {
-        guard let url = URL(string: "https://www.udacity.com/account/auth#!/signup") else { return }
+        guard let url = URL(string: "https://auth.udacity.com/sign-up") else { return }
         UIApplication.shared.open(url)
         
         
     }
     @IBAction func loginC(_ sender: Any) {
         if emailTextField.text != "" && passwordTextField.text != ""{
-                   self.setActivityIndicator(isOn: true)
+                  
+            self.setActivityIndicator(isOn: true)
+           
             ParseClient.request(username: emailTextField.text!, password: passwordTextField.text!) { (success, error) in
-                       self.setActivityIndicator(isOn: false)
-                       if success{
-                           DispatchQueue.main.async {
+                       
+                self.setActivityIndicator(isOn: false)
+                       
+                if success{
+                          
+                    DispatchQueue.main.async {
 
-                            self.performSegue(withIdentifier: "showTabBar", sender: self)
+                            
+                        self.performSegue(withIdentifier: "showTabBar", sender: self)
                            }
                        }
-                       else{
-                           self.popupAlert(topic: nil, message: error?.localizedDescription ?? "")
-                       }
-                   }
-               }
-               else{
-                   self.popupAlert(topic: nil, message: "Empty Email or Password")
-               }
+                      
+                else{
+                     
+                    self.popupAlert(topic: nil, message: error?.localizedDescription ?? "")
+                     
+                }
+                  
+            }
+             
         }
-    func setActivityIndicator(isOn: Bool){
-          if isOn{
-              self.activityIndicator.startAnimating()
-              UIApplication.shared.beginIgnoringInteractionEvents()
-          }
-          else{
-              self.activityIndicator.stopAnimating()
-              self.activityIndicator.hidesWhenStopped = true
-              UIApplication.shared.endIgnoringInteractionEvents()
-          }
-      }
-
+               
+        else{
+               
+            self.popupAlert(topic: nil, message: "Empty Email or Password")
+            
+        }
+       
     }
+ 
+    func setActivityIndicator(isOn: Bool){
+ 
+        if isOn{
+          
+            self.activityIndicator.startAnimating()
+            UIApplication.shared.beginIgnoringInteractionEvents()
+          }
+          
+        else{
+            
+            self.activityIndicator.stopAnimating()
+            
+            self.activityIndicator.hidesWhenStopped = true
+              
+            UIApplication.shared.endIgnoringInteractionEvents()
+    
+        }
+    
+    }
+
+    
+}
 extension UIViewController{
     func actionAlert(topic: String? = nil, message: String? = nil, complition: @escaping(UIAlertAction) -> Void){
         let alert = UIAlertController(title: topic, message: message, preferredStyle: .alert)

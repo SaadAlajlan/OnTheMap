@@ -60,7 +60,7 @@ class TableViewController: UIViewController{
    
     @objc func reloadTapped() {
                       
-                ParseClient.getLocations(url: URL(string: API.MAIN + "StudentLocation?limit=100&order=-updatedAt")!, completion: handleLocationsResponse(data:error:))
+        ParseClient.getLocations(url: URL(string: API.ParamaterKeys.limit + "=100&order=-updatedAt")!, completion: handleLocationsResponse(data:error:))
                             
          }
    
@@ -81,7 +81,8 @@ class TableViewController: UIViewController{
           
         ParseClient.Auth.sessionId = ""
        
-        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+               self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+
                             
            
             }
