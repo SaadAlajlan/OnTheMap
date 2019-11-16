@@ -130,13 +130,11 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xpc-oW-6zX">
-                                <rect key="frame" x="124" y="597" width="166" height="38"/>
-                                <state key="normal" title="Find on the Map" image="magnifyingglass" catalog="system">
-                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
+                                <rect key="frame" x="60" y="634" width="294" height="52"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Find on the Map" image="magnifyingglass" catalog="system"/>
                                 <connections>
                                     <action selector="findOnTheMap:" destination="Bza-kt-yQN" eventType="touchUpInside" id="I5J-UE-mpz"/>
-                                    <segue destination="H2Y-DM-qTq" kind="show" identifier="ShowLocation" id="C29-5a-gBe"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Where are you studying today?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aik-Eh-IXb">
@@ -149,17 +147,17 @@
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Aik-Eh-IXb" firstAttribute="top" secondItem="p4L-6N-lTt" secondAttribute="top" constant="74" id="0iq-Te-cE7"/>
-                            <constraint firstItem="p4L-6N-lTt" firstAttribute="bottom" secondItem="Xpc-oW-6zX" secondAttribute="bottom" constant="101" id="Hrs-rb-Yie"/>
-                            <constraint firstItem="Xpc-oW-6zX" firstAttribute="top" secondItem="p4L-6N-lTt" secondAttribute="top" constant="553" id="Jc8-Qq-b3Z"/>
+                            <constraint firstItem="p4L-6N-lTt" firstAttribute="bottom" secondItem="Xpc-oW-6zX" secondAttribute="bottom" constant="50" id="Hrs-rb-Yie"/>
+                            <constraint firstItem="Xpc-oW-6zX" firstAttribute="top" secondItem="p4L-6N-lTt" secondAttribute="top" constant="590" id="Jc8-Qq-b3Z"/>
                             <constraint firstItem="Aik-Eh-IXb" firstAttribute="leading" secondItem="p4L-6N-lTt" secondAttribute="leading" constant="124" id="L9b-Xd-JBj"/>
                             <constraint firstItem="p4L-6N-lTt" firstAttribute="bottom" secondItem="T0R-wh-7iX" secondAttribute="bottom" constant="250" id="LaF-rT-URN"/>
-                            <constraint firstItem="p4L-6N-lTt" firstAttribute="trailing" secondItem="Xpc-oW-6zX" secondAttribute="trailing" constant="124" id="My2-n0-fbm"/>
+                            <constraint firstItem="p4L-6N-lTt" firstAttribute="trailing" secondItem="Xpc-oW-6zX" secondAttribute="trailing" constant="60" id="My2-n0-fbm"/>
                             <constraint firstItem="T0R-wh-7iX" firstAttribute="leading" secondItem="p4L-6N-lTt" secondAttribute="leading" id="PuC-6Y-LEC"/>
                             <constraint firstItem="p4L-6N-lTt" firstAttribute="trailing" secondItem="T0R-wh-7iX" secondAttribute="trailing" id="UHV-q7-5zx"/>
                             <constraint firstItem="T0R-wh-7iX" firstAttribute="top" secondItem="Aik-Eh-IXb" secondAttribute="bottom" constant="43" id="Yus-kj-EiE"/>
                             <constraint firstItem="T0R-wh-7iX" firstAttribute="centerX" secondItem="Aik-Eh-IXb" secondAttribute="centerX" id="aaa-LR-cQg"/>
                             <constraint firstItem="T0R-wh-7iX" firstAttribute="centerX" secondItem="EJU-9h-PUL" secondAttribute="centerX" id="fBp-aW-MuW"/>
-                            <constraint firstItem="Xpc-oW-6zX" firstAttribute="leading" secondItem="p4L-6N-lTt" secondAttribute="leading" constant="124" id="icp-wn-GTG"/>
+                            <constraint firstItem="Xpc-oW-6zX" firstAttribute="leading" secondItem="p4L-6N-lTt" secondAttribute="leading" constant="60" id="icp-wn-GTG"/>
                             <constraint firstItem="Xpc-oW-6zX" firstAttribute="centerX" secondItem="p4L-6N-lTt" secondAttribute="centerX" id="oCg-DM-UuY"/>
                             <constraint firstItem="T0R-wh-7iX" firstAttribute="top" secondItem="p4L-6N-lTt" secondAttribute="top" constant="250" id="pyd-fB-4TY"/>
                         </constraints>
@@ -169,6 +167,7 @@
                     <connections>
                         <outlet property="FindLocation" destination="T0R-wh-7iX" id="pFL-GO-vQK"/>
                         <outlet property="locationField" destination="T0R-wh-7iX" id="iti-jU-Z5w"/>
+                        <segue destination="H2Y-DM-qTq" kind="show" identifier="ShowLocation" id="lX5-hL-oKe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oQE-CZ-JNB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -193,7 +192,8 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ONf-nj-9jk">
-                                <rect key="frame" x="155" y="595" width="103" height="31"/>
+                                <rect key="frame" x="60" y="644" width="294" height="48"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                 <state key="normal" title="Submit" image="paperplane.fill" catalog="system">
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -202,30 +202,36 @@
                                     <action selector="submit:" destination="H2Y-DM-qTq" eventType="touchUpInside" id="x3G-bD-G8y"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="0fh-zK-nzi">
+                                <rect key="frame" x="197" y="480" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="rXG-GU-kDa" firstAttribute="bottom" secondItem="Nb1-2P-LQB" secondAttribute="bottom" id="9x5-zs-egF"/>
-                            <constraint firstItem="ONf-nj-9jk" firstAttribute="leading" secondItem="rXG-GU-kDa" secondAttribute="leading" constant="155" id="AKi-iW-D7f"/>
                             <constraint firstItem="rXG-GU-kDa" firstAttribute="trailing" secondItem="Nb1-2P-LQB" secondAttribute="trailing" id="DJr-iM-6kh"/>
-                            <constraint firstItem="Nb1-2P-LQB" firstAttribute="leading" secondItem="ONf-nj-9jk" secondAttribute="trailing" constant="-258" id="JTH-Hg-gxv"/>
+                            <constraint firstItem="0fh-zK-nzi" firstAttribute="leading" secondItem="rXG-GU-kDa" secondAttribute="leading" constant="197" id="EXa-9U-CRk"/>
                             <constraint firstItem="Nb1-2P-LQB" firstAttribute="leading" secondItem="rXG-GU-kDa" secondAttribute="leading" id="L2P-Au-7p3"/>
-                            <constraint firstItem="rXG-GU-kDa" firstAttribute="bottom" secondItem="ONf-nj-9jk" secondAttribute="bottom" constant="110" id="MYb-tF-nOW"/>
                             <constraint firstItem="Nb1-2P-LQB" firstAttribute="centerX" secondItem="rXG-GU-kDa" secondAttribute="centerX" id="N49-ki-25i"/>
                             <constraint firstItem="btr-cP-po8" firstAttribute="top" secondItem="rXG-GU-kDa" secondAttribute="top" id="NML-co-hfv"/>
+                            <constraint firstItem="rXG-GU-kDa" firstAttribute="bottom" secondItem="0fh-zK-nzi" secondAttribute="bottom" constant="236" id="PYD-h3-IjC"/>
                             <constraint firstItem="btr-cP-po8" firstAttribute="centerX" secondItem="rXG-GU-kDa" secondAttribute="centerX" id="UKI-p7-aoD"/>
                             <constraint firstItem="Nb1-2P-LQB" firstAttribute="top" secondItem="rXG-GU-kDa" secondAttribute="top" constant="200" id="Vuf-bI-qTQ"/>
+                            <constraint firstItem="ONf-nj-9jk" firstAttribute="top" secondItem="rXG-GU-kDa" secondAttribute="top" constant="600" id="XjI-4x-9So"/>
+                            <constraint firstItem="rXG-GU-kDa" firstAttribute="bottom" secondItem="ONf-nj-9jk" secondAttribute="bottom" constant="44" id="b6y-sU-jah"/>
                             <constraint firstItem="btr-cP-po8" firstAttribute="leading" secondItem="rXG-GU-kDa" secondAttribute="leading" id="bbo-BD-b7w"/>
+                            <constraint firstItem="0fh-zK-nzi" firstAttribute="top" secondItem="rXG-GU-kDa" secondAttribute="top" constant="436" id="els-5f-Q0H"/>
                             <constraint firstItem="rXG-GU-kDa" firstAttribute="bottom" secondItem="btr-cP-po8" secondAttribute="bottom" constant="491" id="gl8-bf-Gn1"/>
                             <constraint firstItem="rXG-GU-kDa" firstAttribute="trailing" secondItem="btr-cP-po8" secondAttribute="trailing" id="hQJ-Q3-PrX"/>
-                            <constraint firstItem="rXG-GU-kDa" firstAttribute="trailing" secondItem="ONf-nj-9jk" secondAttribute="trailing" constant="156" id="nBG-YD-F1q"/>
-                            <constraint firstItem="ONf-nj-9jk" firstAttribute="top" secondItem="rXG-GU-kDa" secondAttribute="top" constant="551" id="oCc-Ug-luz"/>
-                            <constraint firstItem="ONf-nj-9jk" firstAttribute="top" secondItem="Nb1-2P-LQB" secondAttribute="bottom" constant="-141" id="wqj-Y8-Qeh"/>
+                            <constraint firstItem="rXG-GU-kDa" firstAttribute="trailing" secondItem="ONf-nj-9jk" secondAttribute="trailing" constant="60" id="iHQ-iW-NwY"/>
+                            <constraint firstItem="ONf-nj-9jk" firstAttribute="leading" secondItem="rXG-GU-kDa" secondAttribute="leading" constant="60" id="qTO-QY-E7I"/>
+                            <constraint firstItem="rXG-GU-kDa" firstAttribute="trailing" secondItem="0fh-zK-nzi" secondAttribute="trailing" constant="197" id="xDp-rJ-gsk"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="rXG-GU-kDa"/>
                     </view>
                     <navigationItem key="navigationItem" id="odU-XW-vQR"/>
                     <connections>
+                        <outlet property="indicatorView" destination="0fh-zK-nzi" id="NDK-YY-elH"/>
                         <outlet property="mapView" destination="Nb1-2P-LQB" id="ZlA-35-K33"/>
                         <outlet property="urlField" destination="btr-cP-po8" id="Yul-IO-Wd2"/>
                     </connections>

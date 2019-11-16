@@ -14,28 +14,28 @@ class NewLocationViewController: UIViewController, UITextFieldDelegate{
     
     @IBOutlet weak var locationField: UITextField!
     
-    @IBOutlet weak var FindLocation: UITextField!
+    @IBOutlet weak var findLocation: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
         locationField.delegate = self
     }
     override func viewWillAppear(_ animated: Bool) {
-
+        
         super.viewWillAppear(animated)
-       
-    
+        
+        
     }
-
+    
     
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-          textField.resignFirstResponder()
-          return true
-      }
+        textField.resignFirstResponder()
+        return true
+    }
     @IBAction func findOnTheMap(_ sender: Any) {
-        if FindLocation.text != "" {
-            ParseClient.Auth.userPosted.mapString = FindLocation.text!
-           
+        if findLocation.text != "" {
+            ParseClient.Auth.userPosted.mapString = findLocation.text!
+            
             performSegue(withIdentifier: "ShowLocation", sender: self)
         }
         else{

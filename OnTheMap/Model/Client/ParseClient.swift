@@ -12,13 +12,13 @@ import MapKit
 class ParseClient {
     
     struct Auth {
-          static var userPosted = StudentLocation(createdAt: "", firstName: "", lastName: "", latitude: 0, longitude: 0, mapString: "", mediaURL: "", objectId: "", uniqueKey: "", updatedAt: "")
-          static var userList: [StudentLocation] = []
-          static var sessionId: String = ""
-          static var key = ""
-      }
+        static var userPosted = StudentLocation(createdAt: "", firstName: "", lastName: "", latitude: 0, longitude: 0, mapString: "", mediaURL: "", objectId: "", uniqueKey: "", updatedAt: "")
+        static var userList: [StudentLocation] = []
+        static var sessionId: String = ""
+        static var key = ""
+    }
     
-class func getLocations(url: URL, completion: @escaping (StudentLocations?, Error?) -> Void) {
+    class func getLocations(url: URL, completion: @escaping (StudentLocations?, Error?) -> Void) {
         taskForGetRequest(url: url, responseType: StudentLocations.self) { (response, error) in
             if let response = response{
                 DispatchQueue.main.async {
@@ -52,7 +52,7 @@ class func getLocations(url: URL, completion: @escaping (StudentLocations?, Erro
         }
     }
     
-
+    
     
     class func taskForGetRequest<ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, completion: @escaping (ResponseType?, Error?) -> Void){
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
@@ -62,7 +62,7 @@ class func getLocations(url: URL, completion: @escaping (StudentLocations?, Erro
                 }
                 return
             }
-//
+            //
             do{
                 let responseObject = try JSONDecoder().decode(ResponseType.self, from: data)
                 DispatchQueue.main.async {
@@ -126,7 +126,7 @@ class func getLocations(url: URL, completion: @escaping (StudentLocations?, Erro
         var request = URLRequest(url: url)
         request.httpMethod = API.ParamaterKeys.POST
         request.addValue(API.HeaderValues.PARSE_APP_ID, forHTTPHeaderField: API.HeaderKeys.PARSE_APP_KEY)
-         request.addValue(API.HeaderValues.PARSE_APP_ID, forHTTPHeaderField: API.HeaderKeys.PARSE_APP_ID)
+        request.addValue(API.HeaderValues.PARSE_APP_ID, forHTTPHeaderField: API.HeaderKeys.PARSE_APP_ID)
         request.httpBody = body
         
         let task = URLSession.shared.dataTask(with: request) { originalData, reponse, error in
@@ -162,6 +162,6 @@ class func getLocations(url: URL, completion: @escaping (StudentLocations?, Erro
         task.resume()
     }
 }
-   
+
 
 

@@ -11,10 +11,10 @@ import Foundation
 struct StudentLocations : Codable{
     
     let results : [StudentLocation]
-
+    
 }
 struct StudentLocation : Codable, Equatable {
-  var createdAt: String
+    var createdAt: String
     var firstName: String
     var lastName: String
     var latitude: Double
