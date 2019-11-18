@@ -66,6 +66,9 @@
 		93224357236D6C3500A03FC0 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				9381205E23634FA300B49301 /* Client */,
+				937A9010237F14E700DEDCA2 /* Request */,
+				9381205F23634FBE00B49301 /* Responses */,
 				93224358236D6C4D00A03FC0 /* API.swift */,
 			);
 			path = Network;
@@ -102,8 +105,9 @@
 				93812041236312AC00B49301 /* AppDelegate.swift */,
 				93812043236312AC00B49301 /* SceneDelegate.swift */,
 				9381204F236312AE00B49301 /* Info.plist */,
-				9381205723634CA800B49301 /* Model */,
 				9381205823634CBA00B49301 /* Controller */,
+				93C9DA7723832C2F00826E6F /* Extentions */,
+				9381205723634CA800B49301 /* Model */,
 				938120652363506200B49301 /* Assets */,
 			);
 			path = OnTheMap;
@@ -112,10 +116,8 @@
 		9381205723634CA800B49301 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				937A9010237F14E700DEDCA2 /* Request */,
+				9381206F2363769400B49301 /* StudentLocations.swift */,
 				93224357236D6C3500A03FC0 /* Network */,
-				9381205F23634FBE00B49301 /* Responses */,
-				9381205E23634FA300B49301 /* Client */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -128,7 +130,6 @@
 				93812068236351FF00B49301 /* TableViewController.swift */,
 				937A901C237FE89D00DEDCA2 /* NewLocationViewController.swift */,
 				937A9020237FFDEF00DEDCA2 /* LocateOnTheMapViewController.swift */,
-				93C9DA752380A19600826E6F /* UIViewController+Additions.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -144,7 +145,6 @@
 		9381205F23634FBE00B49301 /* Responses */ = {
 			isa = PBXGroup;
 			children = (
-				9381206F2363769400B49301 /* StudentLocations.swift */,
 				937A9013237F160700DEDCA2 /* LoginResponse.swift */,
 				937A9017237F1DCB00DEDCA2 /* userResponse.swift */,
 				937A9026238075EB00DEDCA2 /* AddLocationResponse.swift */,
@@ -160,6 +160,14 @@
 				9381204C236312AE00B49301 /* LaunchScreen.storyboard */,
 			);
 			path = Assets;
+			sourceTree = "<group>";
+		};
+		93C9DA7723832C2F00826E6F /* Extentions */ = {
+			isa = PBXGroup;
+			children = (
+				93C9DA752380A19600826E6F /* UIViewController+Additions.swift */,
+			);
+			path = Extentions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
